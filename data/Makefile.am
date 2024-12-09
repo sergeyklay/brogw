@@ -13,4 +13,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
-SUBDIRS = src config data
+# install browser-router .desktop file
+dotdesktopdir = $(datarootdir)/applications
+dotdesktop_DATA = browser-router.desktop
