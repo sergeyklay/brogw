@@ -24,6 +24,76 @@ To open a Jira link:
 
 The URL will be routed to the appropriate browser and profile based on your configuration.
 
+** Configuration
+
+Configuration is loaded from prioritized paths:
+
+1. Current directory (~./config.conf~)
+2. User-specific configuration ~$XDG_CONFIG_HOME/browser-router/config.conf~ or =~/.config/browser-router/config.conf= if ~XDG_CONFIG_HOME~ is not defined)
+3. Global configuration (~/etc/browser-router/config.conf~)
+
+The configuration file contains rules in the format:
+
+#+begin_src plaintext
+  <URL_REGEX>=<BROWSER_COMMAND>
+#+end_src
+
+*** Example Configuration
+
+#+begin_src plaintext
+  https://acme\.atlassian\.net=google-chrome --profile-directory='Default'
+  https://app\.hibob\.com=google-chrome --profile-directory='Default'
+  https://.*\.youtube\.com=firefox
+#+end_src
+
+- **Left-hand side:** Regular expression to match URLs.
+- **Right-hand side:** Command to launch the appropriate browser with necessary arguments.
+
+If no rules match, the utility defaults to ~firefox~. Modify the ~defaultBrowser~ variable in the source code to change this behavior.
+
+** Installation
+
+To install Browser Router, follow the steps below.
+
+1. *Prepare the environment:*
+   Ensure you have the following tools installed on your system:
+   - A POSIX-compatible shell
+   - GCC or another C compiler
+   - [[https://www.gnu.org/software/make][GNU make]] 3.81 or later
+   - [[https://www.gnu.org/software/autoconf/autoconf.html][autoconf]] 2.31 or later
+   - [[https://www.gnu.org/software/automake][automake]] 1.14 or later
+
+2. *Download the source code:*
+   #+begin_src shell
+     git clone https://github.com/sergeyklay/browser-router.git
+     cd browser-router
+   #+end_src
+
+3. *Generate the configuration files:*
+   #+begin_src shell
+     autoreconf --install
+   #+end_src
+
+4. *Configure the build:*
+   #+begin_src shell
+     ./configure
+   #+end_src
+   You can pass options to ~./configure~ to customize the build process. For example:
+   #+begin_src shell
+     ./configure --prefix=/usr/local
+   #+end_src
+
+5. *Compile the program:*
+   #+begin_src shell
+     make
+   #+end_src
+
+6. *Install the program:* (optional)
+   #+begin_src shell
+     make install
+   #+end_src
+   By default, the program is installed in ~/usr/local/bin~ and ~make install~ will require ~sudo~. Use the ~--prefix~ option with ~./configure~ to change the installation directory, for example to =~/.local=.
+
 ** License
 
 Browser Router is open source software licensed under the [[https://github.com/sergeyklay/browser-router/blob/main/LICENSE][GNU General Public Licence version 3]].
