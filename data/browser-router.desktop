@@ -1,6 +1,7 @@
 [Desktop Entry]
-Type=Application
 Name=BrowserRouter
+Comment=Route links to appropriate web browser
+Type=Application
 Exec=browser-router %u
 Categories=Network;WebBrowser
 MimeType=x-scheme-handler/http;x-scheme-handler/https;
