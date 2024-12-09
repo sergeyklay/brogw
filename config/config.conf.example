@@ -1,0 +1,14 @@
+# Example configuration for Browser Router
+
+# Match Atlassian links and open in Chrome's Default profile
+https://acme\.atlassian\.net=google-chrome --profile-directory='Default'
+
+# Match HiBob links and open in Chrome's HR profile
+https://app\.hibob\.com=google-chrome --profile-directory='HR'
+
+# Match YouTube links and open in Firefox
+https://.*\.youtube\.com=firefox
+
+# Default fallback browser
+# Uncomment and modify the following line to set a custom default browser
+# default=firefox
