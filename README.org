@@ -92,7 +92,13 @@ To install Browser Router, follow the steps below.
    #+begin_src shell
      make install
    #+end_src
-   By default, the program is installed in ~/usr/local/bin~ and ~make install~ will require ~sudo~. Use the ~--prefix~ option with ~./configure~ to change the installation directory, for example to =~/.local=.
+   By default, the program is installed in ~/usr/local/bin~ and ~make install~ will require ~sudo~. Use the ~--prefix~ option with ~./configure~ to change the installation directory, for example to
+
+   #+begin_src shell
+     ./configure --prefix=$HOME/.local
+     make
+     make install
+   #+end_src
 
 ** License
 
