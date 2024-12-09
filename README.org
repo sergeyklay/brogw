@@ -1,0 +1,34 @@
+* Browser Router
+
+Browser Router is a lightweight utility designed to route links to appropriate web browsers and profiles based on user-defined rules. This tool is particularly useful for users managing multiple browsers or profiles for work and personal tasks, offering an automated way to open links in the desired environment.
+
+** Features
+
+- *Link Routing:* Open URLs in the browser specified by matching rules.
+- *Flexible Configuration:* Define routing rules in a configuration file supporting regular expressions.
+- *Fallback Support:* Defaults to the user’s preferred browser if no rule matches.
+
+** Usage
+
+#+begin_src shell
+  browser-router <URL>
+#+end_src
+
+*** Example
+
+To open a Jira link:
+
+#+begin_src shell
+  browser-router https://acme.atlassian.net/browse/INFRA-67059
+#+end_src
+
+The URL will be routed to the appropriate browser and profile based on your configuration.
+
+** License
+
+Browser Router is open source software licensed under the [[https://github.com/sergeyklay/browser-router/blob/main/LICENSE][GNU General Public Licence version 3]].
+Copyright © 2024 Free Software Foundation, Inc.
+
+** Contact
+
+For bug reports, suggestions, or general inquiries, please use GitHub Issues or just mail me to [[mailto:gnu@serghei.pl][gnu@serghei.pl]].
