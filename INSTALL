@@ -1,0 +1,115 @@
+Browser Router Installation Guide
+Copyright (C) 2024 Free Software Foundation, Inc.
+See the end of the file for license conditions.
+
+
+This file contains general information on building and installing
+Browser Router.
+
+BASIC INSTALLATION
+
+To build and install Browser Router on most Unix systems, follow these
+steps:
+
+  1.  Ensure you have the following tools installed on your system:
+
+      - C99 compatible compiler
+      - GNU make
+      - Autoconf
+      - Automake
+
+  2.  Generate the configure script by running:
+
+          autoreconf --install
+
+  3.  Run the configure script to adapt the build process to your
+      system:
+
+          ./configure
+
+      You may pass additional options to customize the
+      installation. For example, to install in a user-specific
+      directory:
+
+          ./configure --prefix=$HOME/.local
+
+      Refer to the "CONFIGURE OPTIONS" section below for more details.
+
+  4.  Build the program by running:
+
+          make
+
+  5.  Install the program (requires root privileges unless you
+      specified a user-specific prefix):
+
+          make install
+
+      By default, the program is installed in /usr/local/bin. The
+      configuration file example is placed in
+      /etc/browser-router/config.conf.example.
+
+  6.  Create your configuration file based on the example provided:
+
+          cp /etc/browser-router/config.conf.example ~/.config/browser-router/config.conf
+
+      Edit this file to define your routing rules.
+
+  7.  Integrate Browser Router with your desktop environment:
+
+          xdg-settings set default-web-browser browser-router.desktop
+
+      This ensures that all HTTP and HTTPS links are routed through
+      Browser Router.
+
+  8.  Test the installation by running:
+
+          browser-router https://example.com
+
+      This should open the URL using the appropriate browser as per
+      your configuration.
+
+CONFIGURE OPTIONS
+
+You can pass various options to the ./configure script to customize
+the build process. Common options include:
+
+  --prefix=PREFIX   Specify the installation prefix. Default is
+                    /usr/local.
+  --sysconfdir=DIR  Specify the directory for system-wide configuration
+                    files. Default is PREFIX/etc.
+  --bindir=DIR      Specify the directory for executable programs.
+                    Default is PREFIX/bin.
+
+For detailed help use ./configure --help command.
+
+CLEANING UP
+
+After installation, you can remove the build artifacts to save space:
+
+    make clean
+
+If you need to reconfigure the build process or start fresh, run:
+
+    make distclean
+
+PROBLEMS
+
+Refer to the README file for additional information. If you encounter
+issues not covered there, please report them to the project’s issue
+tracker at:
+
+    https://github.com/sergeyklay/browser-router/issues
+
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or (at
+your option) any later version.
+
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <https://www.gnu.org/licenses/>.
