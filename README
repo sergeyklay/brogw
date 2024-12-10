@@ -11,51 +11,67 @@ The file INSTALL in this directory contains instructions for building
 and installing Brogw on various systems.  Please read it carefully
 before proceeding.
 
+See the file NEWS for information on new features and other
+user-visible changes in recent versions of Brogw.
+
+The file CONTRIBUTE contains information on contributing to Brogw as a
+developer.
+
 The file COPYING contains the GNU General Public License under which
 this program is distributed.  Please read it to understand your rights
 and responsibilities when using or modifying this software.
 
-You can find a summary of new features and user-visible changes in the
-NEWS file.
+You may encounter bugs in this release.  If you do, please report
+them; your bug reports are valuable contributions to me, since
+they allow me to notice and fix problems on machines I don't have, or
+in code I don't use often.  Please send bug reports to the mailing
+list gnu@serghei.pl.  If possible, use GitHub issue tracker at
+<https://github.com/sergeyklay/brogw/issues>.
 
-If you encounter issues while using Brogw, refer to the PROBLEMS file
-for potential solutions.  For unresolved issues, please report them
-via the project’s issue tracker or email the maintainer at
-gnu@serghei.pl.
+The file 'configure' is a shell script to acclimate Brogw to the
+oddities of your processor and operating system.  It creates the file
+'Makefile' (a script for the 'make' program), which automates the
+process of building and installing Brogw.  See INSTALL for more
+detailed information.
 
-The configure script, which you generate using autoconf, adapts Brogw
-to the specifics of your system.  Running it generates the Makefile,
-which automates the process of building and installing the
-utility.  See INSTALL for more details.
+The file 'configure.ac' is the input used by the autoconf program to
+construct the 'configure' script.
 
-The file Makefile.am files are templates used by configure to generate
-Makefile.
+The shell script 'autogen.sh' generates 'configure' and other files by
+running Autoconf (which in turn uses GNU m4), and configures files in
+the .git subdirectory if you are using Git.  If you want to use it,
+you will need to install recent versions of these build tools.  This
+should be needed only if you edit files like 'configure.ac' that
+specify Brogw's autobuild procedure.
 
-The file configure.ac contains the input for autoconf to construct the
-configure script.
+The file 'Makefile.am' files are templates used by configure to
+generate 'Makefile'.
 
-The file config/config.conf.example provides a sample configuration
-file.  After installation, copy it to your configuration directory and
-modify it to suit your needs.
+The file etc/config.conf.example provides a sample configuration file.
+After installation, copy it to your configuration directory and modify
+it to suit your needs.
 
 There are several subdirectories:
 
-- src: Contains the C source code for the Brogw application.
-- etc: Contains example configuration file and desktop entry files for
-  integrating Brogw with desktop environments.
+'src'       holds the C source code for the Brogw application.
+'etc'       holds miscellaneous architecture-independent data files Brogw
+            uses, like example of the configuration file, desktop entry
+            files for integrating Brogw with desktop environments.
+'m4'        holds Autoconf macros used for generating the configure script.
 
 Note: If you modify files like configure.ac or Makefile.am, you may
 need to regenerate the configure script and Makefiles using autogen.sh
 or autoreconf.
 
-Bug Reports
------------
+
+NOTE ON COPYRIGHT YEARS
 
-Your bug reports are essential for improving Brogw.  If you find a
-bug, please report it to the project’s issue tracker at
-<https://github.com/sergeyklay/brogw/issues>, or email a detailed
-report to gnu@serghei.pl.
+In copyright notices where the copyright holder is the Free Software
+Foundation, then where a range of years appears, this is an inclusive
+range that applies to every year in the range.  For example: 2023-2025
+represents the years 2023, 2024, and 2025.
 
+
 This file is part of Brogw.
 
 Brogw is free software: you can redistribute it and/or modify it under
@@ -70,25 +86,3 @@ for more details.
 
 You should have received a copy of the GNU General Public License
 along with Brogw.  If not, see <https://www.gnu.org/licenses/>.
-
-
-NOTE ON COPYRIGHT YEARS
-
-In copyright notices where the copyright holder is the Free Software
-Foundation, then where a range of years appears, this is an inclusive
-range that applies to every year in the range.  For example: 2023-2025
-represents the years 2023, 2024, and 2025.
-
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or (at
-your option) any later version.
-
-This program is distributed in the hope that it will be useful, but
-WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.

@@ -21,8 +21,10 @@ SUBDIRS = src etc .
 
 EXTRA_DIST = \
 	AUTHORS \
+	CONTRIBUTE \
 	COPYING \
 	INSTALL \
+	NEWS \
 	README \
 	autogen.sh \
 	$(NULL)
