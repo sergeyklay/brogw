@@ -1,0 +1,9 @@
+Makefile.*  linguist-language=Makefile
+*.m4        linguist-language=M4x
+*.ac        linguist-language=M4
+
+AUTHORS     text
+COPYING     text
+INSTALL     text
+NEWS        text
+README      text
