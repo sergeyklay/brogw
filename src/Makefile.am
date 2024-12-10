@@ -16,4 +16,4 @@
 # along with Brogw.  If not, see <https://www.gnu.org/licenses/>.
 
 bin_PROGRAMS = brogw
-brogw_SOURCES = main.c
+brogw_SOURCES = main.c utils.c brogw_config.c matcher.c executor.c

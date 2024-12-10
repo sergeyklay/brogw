@@ -1,0 +1,32 @@
+2024-12-10  Serghei Iakovlev  <gnu@serghei>
+
+    * src/utils.c, src/utils.h (new): Utility functions moved here.
+    * src/brogw_config.c, src/brogw_config.h (new): Configuration loading.
+    * src/matcher.c, src/matcher.h (new): Pattern matching with regex.
+    * src/executor.c, src/executor.h (new): Command execution.
+    * src/main.c: Removed inline code for config loading, URL matching,
+      and command execution. Now delegates to the above modules.
+
+    Reorganize code into separate modules for better maintainability
+    and clarity.
+
+;; Local Variables:
+;; coding: utf-8
+;; End:
+
+  Copyright (C) 2024 Free Software Foundation, Inc.
+
+  This file is part of Brogw.
+
+  Brogw is free software: you can redistribute it and/or modify it
+  under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  Brogw is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+  License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with Brogw.  If not, see <https://www.gnu.org/licenses/>.
