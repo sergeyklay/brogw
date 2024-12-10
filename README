@@ -4,28 +4,29 @@ See the end of the file for license conditions.
 
 This directory tree holds the source code for Brogw, a lightweight
 utility to route links to appropriate web browsers and profiles based
-on user-defined rules. This tool is particularly useful for users
+on user-defined rules.  This tool is particularly useful for users
 managing multiple browsers or profiles for work and personal tasks.
 
 The file INSTALL in this directory contains instructions for building
-and installing Brogw on various systems. Please read it
-carefully before proceeding.
+and installing Brogw on various systems.  Please read it carefully
+before proceeding.
 
 The file COPYING contains the GNU General Public License under which
-this program is distributed. Please read it to understand your rights
+this program is distributed.  Please read it to understand your rights
 and responsibilities when using or modifying this software.
 
 You can find a summary of new features and user-visible changes in the
 NEWS file.
 
 If you encounter issues while using Brogw, refer to the PROBLEMS file
-for potential solutions. For unresolved issues, please report them via
-the project’s issue tracker or email the maintainer at gnu@serghei.pl.
+for potential solutions.  For unresolved issues, please report them
+via the project’s issue tracker or email the maintainer at
+gnu@serghei.pl.
 
 The configure script, which you generate using autoconf, adapts Brogw
-to the specifics of your system. Running it generates the Makefile,
+to the specifics of your system.  Running it generates the Makefile,
 which automates the process of building and installing the
-utility. See INSTALL for more details.
+utility.  See INSTALL for more details.
 
 The file Makefile.am files are templates used by configure to generate
 Makefile.
@@ -34,7 +35,7 @@ The file configure.ac contains the input for autoconf to construct the
 configure script.
 
 The file config/config.conf.example provides a sample configuration
-file. After installation, copy it to your configuration directory and
+file.  After installation, copy it to your configuration directory and
 modify it to suit your needs.
 
 There are several subdirectories:
@@ -50,8 +51,8 @@ or autoreconf.
 Bug Reports
 -----------
 
-Your bug reports are essential for improving Brogw. If you find a bug,
-please report it to the project’s issue tracker at
+Your bug reports are essential for improving Brogw.  If you find a
+bug, please report it to the project’s issue tracker at
 <https://github.com/sergeyklay/brogw/issues>, or email a detailed
 report to gnu@serghei.pl.
 
@@ -64,11 +65,11 @@ option) any later version.
 
 Brogw is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
 for more details.
 
 You should have received a copy of the GNU General Public License
-along with Brogw. If not, see <https://www.gnu.org/licenses/>.
+along with Brogw.  If not, see <https://www.gnu.org/licenses/>.
 
 
 NOTE ON COPYRIGHT YEARS
@@ -86,8 +87,8 @@ your option) any later version.
 
 This program is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/>.
+along with this program.  If not, see <https://www.gnu.org/licenses/>.

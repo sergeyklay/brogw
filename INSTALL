@@ -27,9 +27,8 @@ steps:
 
           ./configure
 
-      You may pass additional options to customize the
-      installation. For example, to install in a user-specific
-      directory:
+      You may pass additional options to customize the installation.
+      For example, to install in a user-specific directory:
 
           ./configure --prefix=$HOME/.local
 
@@ -44,7 +43,7 @@ steps:
 
           make install
 
-      By default, the program is installed in /usr/local/bin. The
+      By default, the program is installed in /usr/local/bin.  The
       configuration file example is placed in
       /etc/brogw/config.conf.example.
 
@@ -71,12 +70,12 @@ steps:
 CONFIGURE OPTIONS
 
 You can pass various options to the ./configure script to customize
-the build process. Common options include:
+the build process.  Common options include:
 
-  --prefix=PREFIX   Specify the installation prefix. Default is
+  --prefix=PREFIX   Specify the installation prefix.  Default is
                     /usr/local.
   --sysconfdir=DIR  Specify the directory for system-wide configuration
-                    files. Default is PREFIX/etc.
+                    files.  Default is PREFIX/etc.
   --bindir=DIR      Specify the directory for executable programs.
                     Default is PREFIX/bin.
 
@@ -94,7 +93,7 @@ If you need to reconfigure the build process or start fresh, run:
 
 PROBLEMS
 
-Refer to the README file for additional information. If you encounter
+Refer to the README file for additional information.  If you encounter
 issues not covered there, please report them to the project’s issue
 tracker at:
 
@@ -108,8 +107,8 @@ your option) any later version.
 
 This program is distributed in the hope that it will be useful, but
 WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with this program. If not, see <https://www.gnu.org/licenses/>.
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
