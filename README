@@ -2,14 +2,13 @@ Copyright (C) 2024 Free Software Foundation, Inc.
 See the end of the file for license conditions.
 
 
-This directory tree holds the source code for Browser Router, a
-lightweight utility to route links to appropriate web browsers and
-profiles based on user-defined rules. This tool is particularly useful
-for users managing multiple browsers or profiles for work and personal
-tasks.
+This directory tree holds the source code for Brogw, a lightweight
+utility to route links to appropriate web browsers and profiles based
+on user-defined rules. This tool is particularly useful for users
+managing multiple browsers or profiles for work and personal tasks.
 
 The file INSTALL in this directory contains instructions for building
-and installing Browser Router on various systems. Please read it
+and installing Brogw on various systems. Please read it
 carefully before proceeding.
 
 The file COPYING contains the GNU General Public License under which
@@ -19,15 +18,14 @@ and responsibilities when using or modifying this software.
 You can find a summary of new features and user-visible changes in the
 NEWS file.
 
-If you encounter issues while using Browser Router, refer to the
-PROBLEMS file for potential solutions. For unresolved issues, please
-report them via the project’s issue tracker or email the maintainer at
-gnu@serghei.pl.
+If you encounter issues while using Brogw, refer to the PROBLEMS file
+for potential solutions. For unresolved issues, please report them via
+the project’s issue tracker or email the maintainer at gnu@serghei.pl.
 
-The configure script, which you generate using autoconf, adapts
-Browser Router to the specifics of your system. Running it generates
-the Makefile, which automates the process of building and installing
-the utility. See INSTALL for more details.
+The configure script, which you generate using autoconf, adapts Brogw
+to the specifics of your system. Running it generates the Makefile,
+which automates the process of building and installing the
+utility. See INSTALL for more details.
 
 The file Makefile.am files are templates used by configure to generate
 Makefile.
@@ -41,9 +39,9 @@ modify it to suit your needs.
 
 There are several subdirectories:
 
-- src: Contains the C source code for the Browser Router application.
+- src: Contains the C source code for the Brogw application.
 - etc: Contains example configuration file and desktop entry files for
-  integrating Browser Router with desktop environments.
+  integrating Brogw with desktop environments.
 
 Note: If you modify files like configure.ac or Makefile.am, you may
 need to regenerate the configure script and Makefiles using autogen.sh
@@ -52,26 +50,25 @@ or autoreconf.
 Bug Reports
 -----------
 
-Your bug reports are essential for improving Browser Router. If you
-find a bug, please report it to the project’s issue tracker at
-<https://github.com/sergeyklay/browser-router/issues>, or email a
-detailed report to gnu@serghei.pl.
+Your bug reports are essential for improving Brogw. If you find a bug,
+please report it to the project’s issue tracker at
+<https://github.com/sergeyklay/brogw/issues>, or email a detailed
+report to gnu@serghei.pl.
 
-This file is part of Browser Router.
+This file is part of Brogw.
 
-Browser Router is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or (at
-your option) any later version.
+Brogw is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your
+option) any later version.
 
-Browser Router is distributed in the hope that it will be useful, but
-WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-General Public License for more details.
+Brogw is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
+for more details.
 
 You should have received a copy of the GNU General Public License
-along with Browser Router. If not, see
-<https://www.gnu.org/licenses/>.
+along with Brogw. If not, see <https://www.gnu.org/licenses/>.
 
 
 NOTE ON COPYRIGHT YEARS

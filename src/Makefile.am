@@ -13,5 +13,5 @@
 # You should have received a copy of the GNU General Public License
 # along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
-bin_PROGRAMS = browser-router
-browser_router_SOURCES = main.c
+bin_PROGRAMS = brogw
+brogw_SOURCES = main.c

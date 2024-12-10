@@ -13,11 +13,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
-# install browser-router .desktop file
 dotdesktopdir = $(datarootdir)/applications
-dotdesktop_DATA = browser-router.desktop
+dotdesktop_DATA = brogw.desktop
 
 EXTRA_DIST = config.conf.example
 
-pkgconfigdir = $(sysconfdir)/browser-router
+pkgconfigdir = $(sysconfdir)/brogw
 pkgconfig_DATA = config.conf.example

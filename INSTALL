@@ -1,14 +1,14 @@
-Browser Router Installation Guide
+Brogw Installation Guide
 Copyright (C) 2024 Free Software Foundation, Inc.
 See the end of the file for license conditions.
 
 
 This file contains general information on building and installing
-Browser Router.
+Brogw.
 
 BASIC INSTALLATION
 
-To build and install Browser Router on most Unix systems, follow these
+To build and install Brogw on most Unix systems, follow these
 steps:
 
   1.  Ensure you have the following tools installed on your system:
@@ -46,24 +46,24 @@ steps:
 
       By default, the program is installed in /usr/local/bin. The
       configuration file example is placed in
-      /etc/browser-router/config.conf.example.
+      /etc/brogw/config.conf.example.
 
   6.  Create your configuration file based on the example provided:
 
-          cp /etc/browser-router/config.conf.example ~/.config/browser-router/config.conf
+          cp /etc/brogw/config.conf.example ~/.config/brogw/config.conf
 
       Edit this file to define your routing rules.
 
-  7.  Integrate Browser Router with your desktop environment:
+  7.  Integrate Brogw with your desktop environment:
 
-          xdg-settings set default-web-browser browser-router.desktop
+          xdg-settings set default-web-browser brogw.desktop
 
       This ensures that all HTTP and HTTPS links are routed through
-      Browser Router.
+      Brogw.
 
   8.  Test the installation by running:
 
-          browser-router https://example.com
+          brogw https://example.com
 
       This should open the URL using the appropriate browser as per
       your configuration.
@@ -98,7 +98,7 @@ Refer to the README file for additional information. If you encounter
 issues not covered there, please report them to the project’s issue
 tracker at:
 
-    https://github.com/sergeyklay/browser-router/issues
+    https://github.com/sergeyklay/brogw/issues
 
 
 This program is free software: you can redistribute it and/or modify

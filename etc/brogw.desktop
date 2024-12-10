@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=BrowserRouter
+Name=Brogw
 Comment=Route links to appropriate web browser
 Type=Application
-Exec=browser-router %u
+Exec=brogw %u
 Categories=Network;WebBrowser
 MimeType=x-scheme-handler/http;x-scheme-handler/https;
