@@ -13,7 +13,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this file.  If not, see <https://www.gnu.org/licenses/>.
 
+brogw
+
 .deps
+build-aux
+autom4te.cache
 
 Makefile
 Makefile.in
@@ -31,5 +35,3 @@ depcomp
 install-sh
 missing
 stamp-h1
-
-brogw
