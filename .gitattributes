@@ -1,5 +1,5 @@
 Makefile.*  linguist-language=Makefile
-*.m4        linguist-language=M4x
+*.m4        linguist-language=M4
 *.ac        linguist-language=M4
 
 AUTHORS     text
