@@ -27,5 +27,5 @@ AC_PROG_INSTALL
 AC_CHECK_HEADERS([regex.h stdlib.h string.h unistd.h])
 
 # Output files
-AC_CONFIG_FILES([Makefile src/Makefile config/Makefile data/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile etc/Makefile])
 AC_OUTPUT

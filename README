@@ -42,9 +42,8 @@ modify it to suit your needs.
 There are several subdirectories:
 
 - src: Contains the C source code for the Browser Router application.
-- config: Contains example configuration files.
-- data: Contains desktop entry files for integrating Browser Router
-  with desktop environments.
+- etc: Contains example configuration file and desktop entry files for
+  integrating Browser Router with desktop environments.
 
 Note: If you modify files like configure.ac or Makefile.am, you may
 need to regenerate the configure script and Makefiles using autogen.sh

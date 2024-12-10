@@ -16,3 +16,8 @@
 # install browser-router .desktop file
 dotdesktopdir = $(datarootdir)/applications
 dotdesktop_DATA = browser-router.desktop
+
+EXTRA_DIST = config.conf.example
+
+pkgconfigdir = $(sysconfdir)/browser-router
+pkgconfig_DATA = config.conf.example
