@@ -22,6 +22,29 @@ The following shell commands then build and run Brogw from scratch:
 	make
 	src/brogw
 
+** Getting involved with development
+
+Bug reports and fixes, feature requests and patches/implementations
+should be sent to gnu@serghei.pl, the bug/feature list.  If possible,
+use issue tracker at <https://github.com/sergeyklay/brogw/issues>.  Be
+prepared to receive comments and requests for changes in your patches,
+following your submission.
+
+To email a patch you can use a shell command like 'git format-patch -1'
+to create a file, and then attach the file to your email.  This nicely
+packages the patch's commit message and changes, and makes sure the
+format and whitespace are not munged in transit by the various mail
+agents.  To send just one such patch without additional remarks, it is
+also possible to use a command like
+
+  git send-email --to=gnu@serghei.pl 0001-DESCRIPTION.patch
+
+However, I prefer the 'git format-patch' method with attachment, as
+doing so delivers patches in the correct and easily-recognizable format
+more reliably, and makes the job of applying the patches easier and less
+error-prone.  It also allows sending patches whose author is someone
+other than the email sender.
+
 
 This file is part of Brogw.
 
