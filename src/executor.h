@@ -1,4 +1,4 @@
-/* executor.h
+/* src/executor.h
    Copyright (C) 2024 Free Software Foundation, Inc.
 
 This file is part of Brogw.
@@ -24,4 +24,4 @@ along with Brigw.  If not, see <https://www.gnu.org/licenses/>.  */
    Return 0 on success, non-zero on failure. */
 int executor_run_command(const char *command, const char *url);
 
-#endif
+#endif /* BROGW_EXECUTOR_H */

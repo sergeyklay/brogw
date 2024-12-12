@@ -1,4 +1,4 @@
-/* brogw_config.h
+/* src/brogw_config.h
    Copyright (C) 2024 Free Software Foundation, Inc.
 
 This file is part of Brogw.
@@ -39,4 +39,4 @@ int config_load_rules(Rule **out, size_t *cnt);
 /* Free memory allocated for rules. */
 void config_free_rules(Rule *rules, size_t cnt);
 
-#endif
+#endif /* BROGW_BROGW_CONFIG_H */

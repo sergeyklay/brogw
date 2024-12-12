@@ -1,4 +1,4 @@
-/* utils.h - Header file for common utility functions.
+/* src/utils.h - Header file for common utility functions.
    Copyright (C) 2024 Free Software Foundation, Inc.
 
 This file is part of Brogw.
@@ -23,4 +23,4 @@ along with Brigw.  If not, see <https://www.gnu.org/licenses/>.  */
 /* Utility to trim whitespace */
 void trim(char *str);
 
-#endif
+#endif /* BROGW_BROGW_CONFIG_HBROGW_UTILS_H */

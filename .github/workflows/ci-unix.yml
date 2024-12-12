@@ -1,0 +1,85 @@
+# ci-windows.yml - build and test Brogw on GNU/Linux & macOS.
+
+# Copyright (C) 2024 Free Software Foundation, Inc.
+#
+# This file is part of Brogw.
+#
+# Brogw is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Brogw is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Brogw.  If not, see <https://www.gnu.org/licenses/>.
+
+name: CI UNIX
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+
+    # The maximum number of minutes to let a workflow run
+    # before GitHub automatically cancels it. Default: 360
+    timeout-minutes: 30
+
+    strategy:
+      # When set to true, GitHub cancels
+      # all in-progress jobs if any matrix job fails.
+      fail-fast: false
+
+      matrix:
+        include:
+          - name: linux-gcc
+            os: ubuntu-latest
+            compiler: gcc
+          - name: macos-clang
+            os: macos-latest
+            compiler: clang
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 5
+
+      - name: Setup Common Prerequisites
+        run: |
+          echo "CC=${{ matrix.compiler }}" >> $GITHUB_ENV
+
+          case ${{ runner.os }} in
+            macOS*)
+              brew update
+              brew install autoconf automake
+              ;;
+          esac
+
+      - name: Bootstrap Brogw
+        run: ./autogen.sh
+
+      - name: Configure Brogw
+        run: ./configure --prefix=$HOME/.local
+
+      - name: Build Brogw
+        run: make
+
+      - name: Install Brogw
+        run: make install
+
+      - name: Run Minimal Load Test
+        run: src/brogw || true
+
+      - name: Success Reporting
+        if: success()
+        run: git log --format=fuller -5
