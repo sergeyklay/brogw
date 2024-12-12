@@ -1,0 +1,89 @@
+# ci-windows.yml - build and test Brogw on Windows.
+
+# Copyright (C) 2024 Free Software Foundation, Inc.
+#
+# This file is part of Brogw.
+#
+# Brogw is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+#
+# Brogw is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with Brogw.  If not, see <https://www.gnu.org/licenses/>.
+
+name: CI Windows
+
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+
+defaults:
+  run:
+    shell: msys2 {0}
+
+jobs:
+  build-and-test:
+    name: ${{ matrix.name }}
+    runs-on: ${{ matrix.os }}
+
+    # The maximum number of minutes to let a workflow run
+    # before GitHub automatically cancels it. Default: 360
+    timeout-minutes: 30
+
+    strategy:
+      # When set to true, GitHub cancels
+      # all in-progress jobs if any matrix job fails.
+      fail-fast: false
+
+      matrix:
+        include:
+          - name: msys2-ucrt64-gcc
+            os: windows-latest
+            compiler: gcc
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 5
+
+      - name: Setup Common Prerequisites
+        uses: msys2/setup-msys2@v2
+        with:
+          update: true
+          msystem: UCRT64
+          install: >-
+            autoconf
+            automake
+            make
+            mingw-w64-ucrt-x86_64-gcc
+            mingw-w64-ucrt-x86_64-libgnurx
+
+      - name: Bootstrap Brogw
+        run: ./autogen.sh
+
+      - name: Configure Brogw
+        run: ./configure --prefix=$HOME/.local
+
+      - name: Build Brogw
+        run: make
+
+      - name: Install Brogw
+        run: make install
+
+      - name: Run Minimal Load Test
+        run: src/brogw || true
+
+      - name: Success Reporting
+        if: success()
+        run: git log --format=fuller -5
+        shell: bash {0}

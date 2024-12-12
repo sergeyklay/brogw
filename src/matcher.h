@@ -1,4 +1,4 @@
-/* matcher.h
+/* src/matcher.h
    Copyright (C) 2024 Free Software Foundation, Inc.
 
 This file is part of Brogw.
@@ -27,4 +27,4 @@ along with Brigw.  If not, see <https://www.gnu.org/licenses/>.  */
 const char *matcher_find_command(const char *url, const Rule *rules,
                                  size_t cnt, const char *default_browser);
 
-#endif
+#endif /* BROGW_MATCHER_H */
