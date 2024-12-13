@@ -50,7 +50,7 @@ dnl Canonicalize the configuration name.
 AC_CANONICAL_HOST
 AC_CANONICAL_BUILD
 
-HAVE_REGEX=no
+HAVE_LIBREGEX=no
 case $host in
   *mingw*)
     AC_CHECK_LIB([regex], [regfree],, AC_MSG_ERROR([regex libray not found]))
@@ -80,5 +80,5 @@ Configured for '${host}'.
   What compiler should brogw be built with?               ${CC} ${CFLAGS}
 "])
 
-AS_ECHO(["  Does Brogw use -lregex?                                 ${HAVE_REGEX}
+AS_ECHO(["  Does Brogw use -lregex?                                 ${HAVE_LIBREGEX}
 "])
