@@ -23,4 +23,4 @@ along with Brigw.  If not, see <https://www.gnu.org/licenses/>.  */
 /* Utility to trim whitespace */
 void trim(char *str);
 
-#endif /* BROGW_BROGW_CONFIG_HBROGW_UTILS_H */
+#endif /* BROGW_UTILS_H */
