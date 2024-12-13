@@ -1,3 +1,14 @@
+2024-12-13  Serghei Iakovlev  <gnu@serghei.pl>
+
+    * configure.ac: Removed debug-mode and werror logic, as well as
+      extraneous compiler flag checks. Simplified the script to rely on
+      standard Autoconf macros and introduced AC_CONFIG_HEADERS([src/config.h]).
+    * autogen.sh: Add '-I m4' to autoreconf invocation to ensure macros are found.
+    * .github/workflows/ci-unix.yml, .github/workflows/ci-windows.yml (new):
+      Added minimal CI workflows for Linux, macOS, and Windows to
+      automatically build and test upon commits and pull requests.
+    * src/config.h (new): Generated header for future conditional compilation.
+
 2024-12-10  Serghei Iakovlev  <gnu@serghei.pl>
 
     Reorganize code into separate modules for better maintainability
