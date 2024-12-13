@@ -7,8 +7,8 @@ Please send Emacs bug reports to 'gnu@serghei.pl'
 
 * Release 1.1, 2024-12-XX
 
-** Improved build portability
-The program now supports compilation on on Windows, extending
+** Improved build portability.
+The program now supports compilation on Windows, extending
 cross-platform compatibility.
 
 ** Simplified the 'configure.ac' script.
