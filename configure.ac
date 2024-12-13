@@ -56,6 +56,9 @@ case $host in
   *mingw*)
     AC_CHECK_LIB([regex], [regfree],
       [HAVE_LIBREGEX=yes], AC_MSG_ERROR([regex libray not found]))
+    if test "${HAVE_LIBREGEX}" = "yes"; then
+      LIBS="$LIBS -lregex"
+    fi
     ;;
   *darwin*)
     ;;
