@@ -50,10 +50,12 @@ dnl Canonicalize the configuration name.
 AC_CANONICAL_HOST
 AC_CANONICAL_BUILD
 
+dnl -lregex is needed for Windows only.
 HAVE_LIBREGEX=no
 case $host in
   *mingw*)
-    AC_CHECK_LIB([regex], [regfree],, AC_MSG_ERROR([regex libray not found]))
+    AC_CHECK_LIB([regex], [regfree],
+      [HAVE_LIBREGEX=yes], AC_MSG_ERROR([regex libray not found]))
     ;;
   *darwin*)
     ;;
