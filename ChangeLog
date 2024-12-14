@@ -8,6 +8,9 @@
 	* src/main.c (main): Removed unnecessary debug statements
 	printing the number of loaded rules and the selected command.
 
+	* src/*.c, src/*.h: Corrected typo in copyright notice ('Brigw' ->
+	'Brogw').
+
 2024-12-13  Serghei Iakovlev  <gnu@serghei.pl>
 
     * configure.ac: Removed debug-mode and werror logic, as well as
