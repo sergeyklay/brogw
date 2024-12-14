@@ -24,6 +24,18 @@ tested across these platforms.
 This is intended for future flexibility in feature toggles and
 platform-specific conditions.
 
+** Routing to any input.
+Brogw now supports routing of any non-empty input, including local
+file paths (e.g., '~/file.html') and custom schemes (e.g., `file://`,
+`ftp://`).  Removed the restrictive check requiring input to start
+with 'http://' or 'https://'.
+
+** Improved error handling.
+Added validation to reject empty string inputs, e.g., 'brogw ""'.
+
+** Code cleanup.
+Cleaned up runtime output by removing unnecessary debug logs.
+
 * Release 1.0, 2024-12-10
 
 Initial release.
