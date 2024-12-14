@@ -36,6 +36,12 @@ Added validation to reject empty string inputs, e.g., 'brogw ""'.
 ** Code cleanup.
 Cleaned up runtime output by removing unnecessary debug logs.
 
+** Improved integration with desktop environments.
+Updated the '.desktop' file to conform with the Freedesktop Desktop
+Entry specification.  Added 'Version', 'GenericName', 'Terminal' and
+'StartupNofify' fields to ensure proper behavior in graphical
+environments.
+
 * Release 1.0, 2024-12-10
 
 Initial release.

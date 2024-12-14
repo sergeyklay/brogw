@@ -8,8 +8,12 @@
 	* src/main.c (main): Removed unnecessary debug statements
 	printing the number of loaded rules and the selected command.
 
-	* src/*.c, src/*.h: Corrected typo in copyright notice ('Brigw' ->
-	'Brogw').
+	* src/*.c, src/*.h: Corrected typo in copyright notice.
+
+	* etc/brogw.desktop: Updated to conform with the Desktop Entry
+	specification.  Added 'Version', 'GenericName', and
+	'StartupNotify' fields.  Specified `Terminal=false` for graphical
+	environments.
 
 2024-12-13  Serghei Iakovlev  <gnu@serghei.pl>
 
