@@ -1,3 +1,13 @@
+2024-12-14  Serghei Iakovlev  <gnu@serghei.pl>
+
+	* src/main.c (main): Removed restrictive validation on input URLs.
+	Now allows any non-empty argument, including local files and custom
+	schemes, ensuring the program functions as a transparent router.
+	Added minimal check for empty string input.
+
+	* src/main.c (main): Removed unnecessary debug statements
+	printing the number of loaded rules and the selected command.
+
 2024-12-13  Serghei Iakovlev  <gnu@serghei.pl>
 
     * configure.ac: Removed debug-mode and werror logic, as well as
