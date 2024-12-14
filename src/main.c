@@ -33,14 +33,15 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  const char *url = argv[1];
-  if (strncmp(url, "http://", 7) != 0 && strncmp(url, "https://", 8) != 0) {
-    fprintf(stderr, "Invalid URL. Must start with http:// or https://\n");
+  if (argv[1][0] == '\0') {
+    fprintf(stderr, "Error: Empty URL or file path provided\n");
     return 1;
   }
 
+  const char *url = argv[1];
   Rule *rules = NULL;
   size_t rule_count = 0;
+
   if (config_load_rules(&rules, &rule_count) != 0) {
     fprintf(stderr, "Error loading configuration\n");
     return 1;
@@ -48,10 +49,6 @@ int main(int argc, char *argv[]) {
 
   const char *default_browser = "firefox";
   const char *command = matcher_find_command(url, rules, rule_count, default_browser);
-
-  // For now, just print how many rules we have loaded
-  printf("Loaded %zu rules.\n", rule_count);
-  printf("Command to execute: %s\n", command);
 
   int ret = executor_run_command(command, url);
   if (ret != 0) {
