@@ -1,0 +1,414 @@
+#!/bin/sh
+### make-dist: create an Borg distribution tar file from current srcdir.
+
+# Copyright (C) 2024 Free Software Foundation, Inc.
+
+# This file is part of Brogw.
+
+# Brogw is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# (at your option) any later version.
+
+# Brogw is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+# or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
+# License for more details.
+
+# You should have received a copy of the GNU General Public License
+# along with Brogw.  If not, see <https://www.gnu.org/licenses/>.
+
+### Commentary:
+
+## This basically creates a duplicate directory structure, and then
+## hard links into it only those files that should be distributed.
+## This means that if you add a file with an odd name, you should make
+## sure that this script will include it.
+
+### Code:
+
+progname="$0"
+
+## Exit if a command fails.
+set -e
+
+## Print out each line we read, for debugging's sake.
+#set -v
+
+LANGUAGE=C
+LC_ALL=C
+LC_MESSAGES=
+LANG=
+export LANGUAGE LC_ALL LC_MESSAGES LANG
+
+## Remove unnecessary restrictions on file access.
+umask 022
+
+clean_up=no
+update=yes
+check=yes
+changelog=yes
+with_info=yes
+newer=""
+new_extension=""
+make_tar=no
+default_gzip=gzip
+verbose=no
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    ## This option tells make-dist to delete the staging directory
+    ## when done.  It is useless to use this unless you make a tar file.
+    "--clean-up" )
+      clean_up=yes
+      ;;
+    ## This option tells make-dist not to recompile or do analogous things.
+    "--no-update" )
+      update=no
+      ;;
+    ## This option says don't check for bad file names, etc.
+    "--no-check" )
+      check=no
+      ;;
+    ## This option says don't generate the top-level ChangeLog.
+    "--no-changelog" )
+      changelog=no
+      ;;
+    ## This options tells make-dist to skip the info files.  This can
+    ## be useful for creating a tarball purely for test purposes.
+    "--no-info" )
+      with_info=no
+      ;;
+    ## This option tells make-dist to make the distribution normally, then
+    ## remove all files older than the given timestamp file.  This is useful
+    ## for creating incremental or patch distributions.
+    "--newer")
+      newer="$2"
+      new_extension=".new"
+      shift
+      ;;
+    ## This option tells make-dist to make a tar file.
+    "--tar" )
+      make_tar=yes
+      ;;
+    ## This option tells make-dist to use 'bzip2' instead of 'gzip'.
+    "--bzip2")
+      default_gzip="bzip2"
+      ;;
+    ## Same with 'xz'.
+    "--xz")
+      default_gzip="xz"
+    ;;
+    "--no-compress")
+      default_gzip="cat"
+      ;;
+    "--verbose")
+      verbose=yes
+      ;;
+    "--help")
+      echo "Usage: ${progname} [options]"
+      echo ""
+      echo "  --clean-up        delete staging directories when done"
+      echo "  --no-update       don't recompile or do analogous things"
+      echo "  --no-check        don't check for bad file names etc"
+      echo "  --no-changelog    don't generate the top-level ChangeLog"
+      echo "  --tar             make a tar file"
+      echo "  --bzip2           use bzip2 instead of gzip"
+      echo "  --xz              use xz instead of gzip"
+      echo "  --no-compress     don't compress"
+      echo "  --verbose         noisier output"
+      echo "  --help            show this help and exit"
+      echo ""
+      exit 0
+      ;;
+    * )
+      echo "${progname}: Unrecognized argument: $1" >&2
+      exit 1
+      ;;
+  esac
+  shift
+done
+
+### Make sure we're running in the right place.
+if [ ! -d src -o ! -f src/main.c ]; then
+  echo "${progname}: Can't find 'src/main.c'." >&2
+  echo "${progname} must be run in the top directory of the Brogw" >&2
+  echo "distribution tree.  cd to that directory and try again." >&2
+  exit 1
+fi
+
+### Find out which version of Brogw this is.
+version=`
+  sed -n 's/^AC_INIT(\[Brogw],[	 ]*\[\([^]]*\).*/\1/p' <configure.ac
+` || version=
+if [ ! "${version}" ]; then
+  echo "${progname}: can't find current Brogw version in './configure.ac'" >&2
+  exit 1
+fi
+
+echo "Version number is ${version}"
+
+if [ $update = yes ]; then
+  if ! grep -q "tree holds version  *${version}" README; then
+    echo "WARNING: README has the wrong version number"
+    echo "Consider running updating the version number to ${version}"
+    sleep 5
+  fi
+fi
+
+### Make sure we don't already have a directory  brogw-${version}.
+
+brogwname="brogw-${version}${new_extension}"
+
+if [ -d ${brogwname} ]; then
+  echo "Directory ${brogwname} already exists"
+  exit 1
+fi
+
+### Make sure the subdirectory is available.
+tempparent="make-dist.tmp.$$"
+if [ -d ${tempparent} ]; then
+  echo "${progname}: staging directory '${tempparent}' already exists.
+Perhaps a previous invocation of '${progname}' failed to clean up after
+itself.  Check that directories whose names are of the form
+'make-dist.tmp.NNNNN' don't contain any important information, remove
+them, and try again." >&2
+  exit 1
+fi
+
+if [ $check = yes ]; then
+  echo "Sanity checking (use --no-check to disable this)..."
+
+  error=no
+  tmpfile=$(mktemp --tmpdir brogw.make-dist.XXX) || {
+    echo "Failed to create temp file" >&2
+    exit 1
+  }
+
+  ## This is only a crude check, eg it does not handle .info
+  ## files with multiple .texi source files.
+  find doc -name '*.texi' > $tmpfile
+
+  bogofiles=
+  while read texi; do
+    info=`sed -n 's/^@setfilename //p' $texi | sed 's|.*info/||'`
+    [ x"${info}" != x"" ] || continue
+    info=info/$info
+    [ -r "$info" ] || continue
+    [ "$info" -nt "$texi" ] || bogofiles="$bogofiles $info"
+  done < $tmpfile
+
+  rm -f $tmpfile
+
+  if [ x"${bogofiles}" != x"" ]; then
+    error=yes
+    echo "The following .info files are older than their .texi files:"
+    echo "${bogofiles}"
+  fi
+
+  ## Is this a release?
+  case $version in
+    [0-9]*.[0-9])
+      if [ -r ChangeLog ]; then
+        if ! grep -q "Version $version released" ChangeLog; then
+          echo "No release notice in ChangeLog"
+          error=yes
+        fi
+      else
+        echo "A release must have a ChangeLog"
+        error=yes
+      fi
+      ;;
+  esac
+
+  if [ $error = yes ]; then
+    echo "Failed checks" >&2
+    exit 1
+  fi
+fi
+
+if [ $update = yes ]; then
+  ## Make sure configure is newer than configure.ac, etc.
+  ## It is better to let autoreconf do what is needed than
+  ## for us to try and duplicate all its checks.
+  echo "Running autoreconf"
+  autoreconf -i -I m4 || {
+    x=$?
+    echo "Autoreconf FAILED" >&2
+    exit $x
+  }
+
+  if [ "$with_info" = yes ] ; then
+    echo "Updating Info files"
+    make info
+  fi
+fi
+
+if [ "$changelog" = yes ] && [ -r .git ]; then
+  top_level_changelog=ChangeLog
+else
+  top_level_changelog=
+fi
+
+# Files to distribute that might not be under version control.
+possibly_non_vc_files="
+  $top_level_changelog
+  MANIFEST aclocal.m4 configure
+  src/config.in
+"$(
+  find doc etc \
+   \( -name '*.texi' -o -name '*.tex' -o -name '*.txt' -o -name '*.pdf' \)
+) || exit
+
+if [ $with_info = yes ]; then
+  info_files="info/dir $(echo info/*.info)" || exit
+else
+  info_files=
+fi
+
+echo "Creating staging directory: '${tempparent}'"
+
+mkdir ${tempparent} || exit
+tempdir="${tempparent}/${brogwname}"
+
+manifest=MANIFEST
+[ -f $manifest ] || manifest=${tempparent}/MANIFEST
+
+# If Git is in use update the file MANIFEST, which can substitute for
+# 'git ls-files' later (e.g., after extraction from a tarball).
+# Otherwise, rely on the existing MANIFEST, which should be maintained some
+# other way when adding or deleting a distributed file while not using Git.
+# Filter out the files in .github, as they aren't useful in the
+# tarball.
+if [ -r .git ] || [ ! -f $manifest ]; then
+  echo "Updating ${manifest}"
+  maninfest_filter_sed='
+  /^.github\//d
+  /^.gitattributes$/d
+  /.gitignore$/d
+  '
+  git ls-files | sed "${maninfest_filter_sed}" > $manifest || exit
+  git ls-files -o -i --exclude-standard | grep 'Makefile\.in$' >>$manifest || exit
+  printf '%s\n' $possibly_non_vc_files $info_files >>$manifest || exit
+  sort -u -o $manifest $manifest || exit
+fi
+
+<$manifest || exit
+
+### This trap ensures that the staging directory will be cleaned up even
+### when the script is interrupted in mid-career.
+if [ "${clean_up}" = yes ]; then
+  trap "echo 'Cleaning up the staging directory'; rm -rf ${tempparent}" EXIT
+fi
+
+echo "Creating top directory: '${tempdir}'"
+if [ $verbose = yes ] && (mkdir --verbose ${tempdir}) >/dev/null 2>&1; then
+  mkdir_verbose='mkdir --verbose'
+else
+  mkdir $tempdir || exit
+  mkdir_verbose="mkdir"
+fi
+
+# file_to_skip is normally empty to link every file, but it can be
+# 'ChangeLog' if we do not want to link the top-level 'ChangeLog'.
+file_to_skip=
+
+if [ "$changelog" = yes ]; then
+  if test -r .git; then
+    ## When making a release or pretest the ChangeLog should already
+    ## have been created and edited as needed.  Don't ignore it.
+    if [ -r ChangeLog ] && [ ! -L ChangeLog ]; then
+      echo "Using existing top-level ChangeLog"
+    else
+      # TODO: Implement me, also ignore ChangeLog
+      echo "Making top-level ChangeLog"
+      make ChangeLog CHANGELOG=${tempdir}/ChangeLog || {
+        x=$?
+        echo "make ChangeLog FAILED (try --no-changelog?)" >&2
+        exit $x
+      }
+      file_to_skip=ChangeLog
+    fi
+  else
+    echo "No repository, so omitting top-level ChangeLog"
+  fi
+fi
+
+echo 'Creating subdirectories'
+MANIFEST_subdir_sed='
+  $a\
+'$tempdir'/info
+  s,[^/]*$,,
+  s,/$,,
+  /^$/d
+  s,^,'$tempdir'/,
+'
+tempsubdirs=$(sed "$MANIFEST_subdir_sed" $manifest | sort -u)
+$mkdir_verbose -p $tempsubdirs || exit
+
+echo "Making links to files"
+while read file; do
+  case $file in
+    MANIFEST) ln $manifest $tempdir/MANIFEST || exit ;;
+    $file_to_skip) continue ;;
+    *) ln "$file" $tempdir/"$file" || exit ;;
+  esac
+done <$manifest
+
+if [ "${newer}" ]; then
+  echo "Removing files older than ${newer}"
+  find ${tempdir} ! -newer "${newer}" -exec rm -f {} \; || exit
+fi
+
+if [ "${make_tar}" = yes ]; then
+  echo "Looking for $default_gzip"
+  found=0
+  temppath=`printf '%s\n' "$PATH" |
+    sed -e 's/^:/.:/' -e 's/::/:.:/g' -e 's/:$/:./' -e 's/:/ /g'
+  `
+  for dir in ${temppath}; do
+    [ -x "${dir}"/$default_gzip ] || continue
+    found=1; break
+  done
+  if [ "$found" = "0" ]; then
+    echo "WARNING: '$default_gzip' not found, will not compress" >&2
+    default_gzip="cat"
+  fi
+  case "${default_gzip}" in
+    bzip2) gzip_extension=.bz2 ;;
+    xz)  gzip_extension=.xz ;;
+    gzip)  gzip_extension=.gz ; default_gzip="gzip --best --no-name";;
+       *)  gzip_extension= ;;
+  esac
+  echo "Creating tar file"
+  taropt='--numeric-owner --owner=0 --group=0 --mode=go+u,go-w'
+  tar -H ustar -cf /dev/null $tempdir/src/main.c 2>/dev/null &&
+    taropt="$taropt -H ustar"
+  tar --sort=name -cf /dev/null $tempdir/src/main.c 2>/dev/null &&
+    taropt="$taropt --sort=name"
+  [ "$verbose" = "yes" ] && taropt="$taropt --verbose"
+
+  (cd $tempparent &&
+   case $default_gzip in
+     cat) tar $taropt -cf - $brogwname;;
+     *) if tar $taropt -cf /dev/null --use-compress-program="$default_gzip" \
+	       $brogwname/src/main.c > /dev/null 2>&1
+	then
+	  tar $taropt -cf - --use-compress-program="$default_gzip" $brogwname
+	else
+	  tar $taropt -cf $brogwname.tar $brogwname &&
+	  $default_gzip <$brogwname.tar
+        fi;;
+   esac
+  ) >$brogwname.tar"$gzip_extension" || exit
+  echo "Distribution tar file '${brogwname}.tar${gzip_extension}' successfully created"
+fi
+
+if [ "${clean_up}" = yes ]; then
+  (cd ${tempparent} && mv ${brogwname} ..) &&
+  rm -rf ${tempparent}
+fi
+
+# Local Variables:
+# mode: sh
+# End:
