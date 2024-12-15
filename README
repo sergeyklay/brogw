@@ -2,7 +2,7 @@ Copyright (C) 2024 Free Software Foundation, Inc.
 See the end of the file for license conditions.
 
 
-This directory tree holds the source code for Brogw, a lightweight
+This directory tree holds version 1.1 of Brogw, a lightweight
 utility to route links to appropriate web browsers and profiles based
 on user-defined rules.  This tool is particularly useful for users
 managing multiple browsers or profiles for work and personal tasks.
@@ -39,7 +39,7 @@ construct the 'configure' script.
 
 The shell script 'autogen.sh' generates 'configure' and other files by
 running Autoconf (which in turn uses GNU m4), and configures files in
-the .git subdirectory if you are using Git.  If you want to use it,
+the '.git' subdirectory if you are using Git.  If you want to use it,
 you will need to install recent versions of these build tools.  This
 should be needed only if you edit files like 'configure.ac' that
 specify Brogw's autobuild procedure.
@@ -51,12 +51,25 @@ The file etc/config.conf.example provides a sample configuration file.
 After installation, copy it to your configuration directory and modify
 it to suit your needs.
 
+The file 'make-dist' is a shell script to build a distribution tar
+file from the current Brogw tree, containing only those files
+appropriate for distribution.  If you make extensive changes to Brogw,
+this script will help you distribute your version to others.
+
 There are several subdirectories:
 
 'src'       holds the C source code for the Brogw application.
 'etc'       holds miscellaneous architecture-independent data files Brogw
             uses, like example of the configuration file, desktop entry
             files for integrating Brogw with desktop environments.
+            The contents of the 'info', and 'doc' subdirectories are
+            architecture-independent too.
+'info'      holds the Info documentation tree for Brogw.
+'doc/brogw' holds the source code for the Brogw Manual.  If you modify the
+            manual sources, you will need the 'makeinfo' program to produce
+            an updated manual.  'makeinfo' is part of the GNU Texinfo
+            package; you need a suitably recent version of Texinfo.
+'build-aux' holds auxiliary files used during the build.
 'm4'        holds Autoconf macros used for generating the configure script.
 
 Note: If you modify files like configure.ac or Makefile.am, you may

@@ -42,6 +42,33 @@ Entry specification.  Added 'Version', 'GenericName', 'Terminal' and
 'StartupNofify' fields to ensure proper behavior in graphical
 environments.
 
+** Introduced 'make-dist' tool.
+Added a new 'make-dist' script to automate the creation of
+distribution tarballs for Brogw.  This script ensures that only the
+appropriate files are included in the distribution, providing a clean
+and reliable way to package the project.
+
+Key features of the 'make-dist' script:
+
+- Supports optional compression with 'gzip', 'bzip2', or 'xz'.
+- Allows for incremental or patch distributions with the '--newer'
+  option.
+- Includes sanity checks for file consistency, such as ensuring
+  '.info' files are up-to-date with their '.texi' sources.
+- Automatically updates the 'MANIFEST' file when running under Git.
+- Provides options to skip certain steps, such as generating Info
+  files or creating a top-level 'ChangeLog'.
+
+Usage:
+
+To create a compressed tarball of the Brogw distribution, run:
+
+    ./make-dist --tar
+
+For more details and advanced options, use:
+
+    ./make-dist --help
+
 * Release 1.0, 2024-12-10
 
 Initial release.
