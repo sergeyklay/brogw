@@ -1,39 +1,124 @@
+# Files that Git should ignore in the Brogw source directory.
+
 # Copyright (C) 2024 Free Software Foundation, Inc.
-#
+
 # This file is part of Brogw.
-#
+
 # Brogw is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 3 of the License, or
 # (at your option) any later version.
-#
+
 # Brogw is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
 # or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public
 # License for more details.
-#
+
 # You should have received a copy of the GNU General Public License
 # along with Brogw.  If not, see <https://www.gnu.org/licenses/>.
 
-brogw
+# Built by 'autogen.sh'.
+/aclocal.m4
+/configure
+/configure~
+src/config.in
+src/config.in~
 
-.deps
-build-aux
-autom4te.cache
-
-Makefile
+# Build by 'automake'.
+autom4te.cache/
 Makefile.in
-aclocal.m4
-autom4te.cache
-compile
-config.h
-config.h.*
-config.guess
-config.status
-config.sub
-configure
-configure~
-depcomp
-install-sh
-missing
+
+# Built by 'configure'.
+Info.plist
+InfoPlist.strings
+Makefile
+/config.status
+src/config.h
+
+# Dependencies.
+.deps/
+deps/
+
+# Time stamps.
+*.stamp
 stamp-h1
+
+# Object files and debugging.
+*.a
+*.dSYM/
+*.dll
+*.core
+*.o
+*.res
+*.so
+*.dylib
+
+# ctags, etags.
+TAGS
+
+# GNU global.
+GPATH
+GSYMS
+GRTAGS
+GTAGS
+
+# GNU idutils.
+ID
+
+# Executables.
+*.exe
+a.out
+nextstep/Brogw.app/
+src/brogw
+src/brogw-[0-9]*
+
+# Documentation.
+*.aux
+*.cm
+*.cms
+*.cp
+*.cps
+*.doc
+*.dvi
+*.fn
+*.fns
+*.info
+*.ky
+*.kys
+*.op
+*.ops
+*.pdf
+*.pg
+*.pgs
+*.pj
+*.pjs
+*.sc
+*.scs
+*.t2d/
+*.tg
+*.tgs
+*.toc
+*.tp
+*.tps
+*.vr
+*.vrs
+doc/*/*.html
+doc/*/*/*.html
+doc/*/*.ps
+doc/*/*/*.ps
+doc/man/brogw.1
+info/
+
+# Built by 'make-dist'.
+/MANIFEST
+make-dist.tmp.*/
+
+# Distribution directories and files.
+/brogw-[0-9]*/
+brogw-[0-9]*.[0-9]*.tar
+brogw-[0-9]*.[0-9]*.tar.bz2
+brogw-[0-9]*.[0-9]*.tar.gz
+brogw-[0-9]*.[0-9]*.tar.xz
+
+# Ignore Finder files on macOS.
+.DS_Store
