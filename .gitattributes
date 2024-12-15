@@ -17,14 +17,21 @@
 # You should have received a copy of the GNU General Public License
 # along with Brogw.  If not, see <https://www.gnu.org/licenses/>.
 
-Makefile.*  linguist-language=Makefile
-*.m4        linguist-language=M4
-*.ac        linguist-language=M4
+AUTHORS text
+CONTRIBUTE text
+COPYING text
+ChangeLog text
+INSTALL text
+NEWS text
+README text
 
-AUTHORS     text
-CONTRIBUTE  text
-COPYING     text
-ChangeLog   text
-INSTALL     text
-NEWS        text
-README      text
+# Hooks for non-default diff hunk headers; see autogen.sh.
+*.ac diff=m4 linguist-language=M4
+*.m4 diff=m4 linguist-language=M4
+Makefile.* diff=make linguist-language=Makefile
+*[Mm]akefile diff=make
+*[-.]sh diff=shell
+*.texi diff=texinfo
+
+# Diff hunk header special-case file names.
+/make-dist diff=shell
