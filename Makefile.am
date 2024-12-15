@@ -25,7 +25,6 @@ EXTRA_DIST = \
 	AUTHORS \
 	CONTRIBUTE \
 	COPYING \
-	ChangeLog \
 	INSTALL \
 	NEWS \
 	README \

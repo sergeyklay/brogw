@@ -20,9 +20,7 @@
 # Built by 'autogen.sh'.
 /aclocal.m4
 /configure
-/configure~
 src/config.in
-src/config.in~
 
 # Build by 'automake'.
 autom4te.cache/
@@ -108,6 +106,14 @@ doc/*/*.ps
 doc/*/*/*.ps
 doc/man/brogw.1
 info/
+
+# Version control and locks.
+*.orig
+*.swp
+*~
+.#*
+\#*\#
+ChangeLog
 
 # Built by 'make-dist'.
 /MANIFEST
