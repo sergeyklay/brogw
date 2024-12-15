@@ -24,10 +24,10 @@ dnl along with Brogw.  If not, see <https://www.gnu.org/licenses/>.
 dnl Prelude.
 dnl -------------------------------------------------------------------------
 AC_PREREQ(2.53)
-AC_INIT([Brogw], [1.0], [gnu@serghei.pl], [],
+AC_INIT([Brogw], [1.1], [gnu@serghei.pl], [],
   [https://github.com/sergeyklay/brogw])
 
-AC_CONFIG_HEADERS([src/config.h])
+AC_CONFIG_HEADERS([src/config.h:src/config.in])
 AC_CONFIG_SRCDIR([src/main.c])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIRS([m4])
