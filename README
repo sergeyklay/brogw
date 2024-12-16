@@ -8,25 +8,25 @@ on user-defined rules.  This tool is particularly useful for users
 managing multiple browsers or profiles for work and personal tasks.
 
 The file INSTALL in this directory contains instructions for building
-and installing Brogw on various systems.  Please read it carefully
+and installing Brogw on various systems, once you have unpacked or
+checked out the entire Brogw file tree.  Please read it carefully
 before proceeding.
 
-See the file NEWS for information on new features and other
+See the file etc/NEWS for information on new features and other
 user-visible changes in recent versions of Brogw.
 
 The file CONTRIBUTE contains information on contributing to Brogw as a
 developer.
 
-The file COPYING contains the GNU General Public License under which
-this program is distributed.  Please read it to understand your rights
-and responsibilities when using or modifying this software.
-
 You may encounter bugs in this release.  If you do, please report
-them; your bug reports are valuable contributions to me, since
-they allow me to notice and fix problems on machines I don't have, or
-in code I don't use often.  Please send bug reports to the mailing
-list gnu@serghei.pl.  If possible, use GitHub issue tracker at
-<https://github.com/sergeyklay/brogw/issues>.
+them; your bug reports are valuable contributions to project
+maintainers, since they allow us to notice and fix problems on
+machines we don't have, or in code I don't use often.  Please send bug
+reports to the mailing list gnu@serghei.pl.  If possible, use GitHub
+issue tracker at <https://github.com/sergeyklay/brogw/issues>.
+
+The 'etc' subdirectory contains several other files, named in capital
+letters, which you might consider looking at when installing Brogw.
 
 The file 'configure' is a shell script to acclimate Brogw to the
 oddities of your processor and operating system.  It creates the file
@@ -44,12 +44,13 @@ you will need to install recent versions of these build tools.  This
 should be needed only if you edit files like 'configure.ac' that
 specify Brogw's autobuild procedure.
 
-The file 'Makefile.am' files are templates used by configure to
-generate 'Makefile'.
-
-The file etc/config.conf.example provides a sample configuration file.
-After installation, copy it to your configuration directory and modify
-it to suit your needs.
+The 'Makefile.am' files contain high-level instructions for Automake.
+They describe the project's structure, including the Brogw program and
+its dependencies.  Automake uses 'Makefile.am' to generate
+'Makefile.in' files, which serve as templates with detailed build
+instructions.  During the configuration process, the 'configure'
+script processes these 'Makefile.in' files to create the final
+'Makefile', tailored to the user's specific system environment.
 
 The file 'make-dist' is a shell script to build a distribution tar
 file from the current Brogw tree, containing only those files
@@ -72,9 +73,9 @@ There are several subdirectories:
 'build-aux' holds auxiliary files used during the build.
 'm4'        holds Autoconf macros used for generating the configure script.
 
-Note: If you modify files like configure.ac or Makefile.am, you may
-need to regenerate the configure script and Makefiles using autogen.sh
-or autoreconf.
+Note: If you modify files like 'configure.ac' or 'Makefile.am', you
+may need to regenerate the 'configure' script and 'Makefile' using
+'autogen.sh' or 'autoreconf'.
 
 
 NOTE ON COPYRIGHT YEARS
