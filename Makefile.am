@@ -20,13 +20,3 @@
 ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
 
 SUBDIRS = src etc .
-
-EXTRA_DIST = \
-	AUTHORS \
-	CONTRIBUTE \
-	COPYING \
-	INSTALL \
-	NEWS \
-	README \
-	autogen.sh \
-	$(NULL)
